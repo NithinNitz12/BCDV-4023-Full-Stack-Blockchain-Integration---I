@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@quicknode/sdk": "^2.2.2"
+  }
+}
