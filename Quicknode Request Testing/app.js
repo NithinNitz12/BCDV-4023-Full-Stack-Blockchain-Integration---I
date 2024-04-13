@@ -1,7 +1,8 @@
 const { Core } = require('@quicknode/sdk');
+require('dotenv').config()
 
 const core = new Core({
-  endpointUrl: 'https://distinguished-damp-wind.avalanche-testnet.quiknode.pro/910039aa826c9b2cfe070987241b1183377ee1c2/ext/bc/C/rpc/',
+  endpointUrl: process.env.URL,
 })
 
 async function f1(){

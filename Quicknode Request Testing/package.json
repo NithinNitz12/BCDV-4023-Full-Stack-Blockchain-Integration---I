@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@quicknode/sdk": "^2.2.2"
+    "@quicknode/sdk": "^2.2.2",
+    "dotenv": "^16.4.5"
   }
 }
