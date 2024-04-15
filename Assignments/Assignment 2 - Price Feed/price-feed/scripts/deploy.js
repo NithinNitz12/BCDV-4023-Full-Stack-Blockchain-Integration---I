@@ -1,6 +1,6 @@
 async function main() {
 
-    const contractFactory = await ethers.getContractFactory('DataConsumerV3');
+    const contractFactory = await ethers.getContractFactory('PriceFeed');
     const contract = await contractFactory.deploy();
 
     console.log('***** Contract deployed to address: ', contract.address);

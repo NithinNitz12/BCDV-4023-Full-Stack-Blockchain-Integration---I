@@ -1,9 +1,9 @@
 //SPDX-License-Identifier: MIT
  
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.6;
  
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
  
 contract PriceFeed is Ownable {
  
@@ -23,7 +23,7 @@ contract PriceFeed is Ownable {
     event FeedAddressUpdated(uint feedid, address newAddress, string description);
     event PriceRequested(string description, int price);
  
-    constructor() Ownable(msg.sender) {
+    constructor() {
         // Chainlink smart contract addresses for the conversion pairs
         // These are the contract addresses on Avalanche Fuji
         feeds[1] = FeedInfo(AggregatorV3Interface(0x31CF013A08c6Ac228C94551d535d5BAfE19c602a), "BTC/USD");
