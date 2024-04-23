@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { contract, contractWithSigner } from "./ethersConfig";
 
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import { Card, CardContent, Typography } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+
 function Data() {
   const [books, setBooks] = useState(null);
   const [bookName, setBookName] = useState("");
@@ -94,56 +100,88 @@ function Data() {
 
   return (
     <>
-      <h1>Data</h1>
-
       {connectedAccount ? (
         <p>Connected account: {connectedAccount}</p>
       ) : (
-        <button onClick={connectWallet}>Connect Wallet</button>
+        <Button variant="contained" onClick={connectWallet}>
+          Connect Wallet
+        </Button>
       )}
 
       {books &&
         books.map((book, index) => (
-          <div key={index}>
-            Book ID: {ethers.utils.formatUnits(book.id, 0)}
-            Book name: {book.title}
-          </div>
+          <Card key={index} sx={{ margin: 2 }}>
+            <CardContent>
+              <Typography variant="h5" component="div">
+                Book ID: {ethers.utils.formatUnits(book.id, 0)}
+              </Typography>
+              <Typography variant="body2">Book name: {book.title}</Typography>
+            </CardContent>
+          </Card>
         ))}
-        {isLoading && <div className="spinner"></div>}
+      {isLoading && (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="10vh"
+        >
+          <CircularProgress />
+        </Box>
+      )}
       <hr />
 
-      <input
-        type="text"
-        placeholder="Book Name"
-        value={bookName}
-        onChange={(e) => setBookName(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Number of copies"
-        value={copies}
-        onChange={(e) => setCopies(e.target.value)}
-      />
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <TextField
+          id="outlined-basic"
+          label="Book Name"
+          variant="outlined"
+          value={bookName}
+          onChange={(e) => setBookName(e.target.value)}
+        />
+        <TextField
+          id="outlined-basic"
+          label="Number of copies"
+          variant="outlined"
+          value={copies}
+          onChange={(e) => setCopies(e.target.value)}
+        />
+      </Box>
+      <br />
+      <Button variant="contained" onClick={handleAddBook}>
+        Add Book
+      </Button>
+      <hr />
+      <br />
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <TextField
+          id="outlined-basic"
+          label="Book ID to Borrow"
+          variant="outlined"
+          value={borrowBookId}
+          onChange={(e) => setBorrowBookId(e.target.value)}
+        />
+      </Box>
+      <br />
+      <Button variant="contained" onClick={handleBorrowBook}>
+        Borrow Book
+      </Button>
 
-      <button onClick={handleAddBook}>Add Book</button>
-
-      <input
-        type="text"
-        placeholder="Book ID to Borrow"
-        value={borrowBookId}
-        onChange={(e) => setBorrowBookId(e.target.value)}
-      />
-
-      <button onClick={handleBorrowBook}>Borrow Book</button>
-
-      <input
-        type="text"
-        placeholder="Book ID to return"
-        value={returnBookId}
-        onChange={(e) => setReturnBookId(e.target.value)}
-      />
-
-      <button onClick={handleReturnBook}>Return Book</button>
+      <hr />
+      <br />
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <TextField
+          id="outlined-basic"
+          label="Book ID to return"
+          variant="outlined"
+          value={returnBookId}
+          onChange={(e) => setReturnBookId(e.target.value)}
+        />
+      </Box>
+      <br />
+      <Button variant="contained" onClick={handleReturnBook}>
+        Return Book
+      </Button>
     </>
   );
 }
